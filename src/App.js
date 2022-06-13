@@ -6,6 +6,7 @@ import Homepage from "./components/HomePage"
 import Company from "./components/Company"
 import JumbotronPage from "./components/JumbotronPage"
 import Category from "./components/Category"
+import Details from "./components/Details"
 import Footer from "./components/Footer"
 import { useState } from "react"
 
@@ -32,6 +33,7 @@ const App = () => {
           path="/category"
           element={<Category search={search} setSearchData={setSearchData} />}
         />
+        <Route path="/:details" element={<Details />} />
       </Routes>
       <Footer />
     </BrowserRouter>
