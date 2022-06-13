@@ -3,20 +3,14 @@ import { useState } from "react"
 import Loading from "./Loading"
 import Error from "./Error"
 import SingleJob from "./SingleJob"
-
-const HomePage = (props) => {
+const Category = (props) => {
   const [data, setData] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState(false)
-
-  //   useEffect(() => {
-  //     fetchData()
-  //   }, [])
-
   const fetchData = async () => {
     try {
       const response = await fetch(
-        `https://strive-jobs-api.herokuapp.com/jobs?search=${props.search}&limit=10`
+        `https://strive-jobs-api.herokuapp.com/jobs?category=${props.search}&limit=10`
       )
       if (response.ok) {
         const responseData = await response.json()
@@ -63,4 +57,4 @@ const HomePage = (props) => {
     </Container>
   )
 }
-export default HomePage
+export default Category
