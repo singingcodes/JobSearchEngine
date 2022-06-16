@@ -21,7 +21,7 @@ const CompanySearchResults = (props) => {
   const params = useParams()
 
   useEffect(() => {
-    props.getJobs(params)
+    props.getJobs(params.companyName)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 

@@ -18,7 +18,7 @@ export const getJobsAction = (props) => {
   return async (dispatch, getState) => {
     try {
       let response = await fetch(
-        `https://strive-jobs-api.herokuapp.com/jobs?company=${props}`
+        "https://strive-jobs-api.herokuapp.com/jobs?company=" + props
       )
       if (response.ok) {
         let data = await response.json()
