@@ -1,14 +1,22 @@
-import { Component } from 'react'
-import { Container, Row, Col, Form } from 'react-bootstrap'
-import Job from './Job'
+import { Component } from "react"
+import { Container, Row, Col, Form } from "react-bootstrap"
+import Job from "./Job"
+import { connect } from "react-redux"
+import { getJobSearchAction } from "../redux/actions"
+
+const mapStateToProps = (state) => ({
+  jobs: state.job.data,
+  isLoadingData: state.job.isLoading,
+  isErrorFetching: state.job.isError,
+})
+const mapDispatchToProps = (dispatch) => ({
+  getJobSearch: (props) => dispatch(getJobSearchAction(props)),
+})
 
 class MainSearch extends Component {
   state = {
-    query: '',
-    jobs: [],
+    query: "",
   }
-
-  baseEndpoint = 'https://strive-jobs-api.herokuapp.com/jobs?search='
 
   handleChange = (e) => {
     this.setState({ query: e.target.value })
@@ -17,18 +25,7 @@ class MainSearch extends Component {
   handleSubmit = async (e) => {
     e.preventDefault()
 
-    const response = await fetch(
-      this.baseEndpoint + this.state.query + '&limit=20'
-    )
-
-    if (!response.ok) {
-      alert('Error fetching results')
-      return
-    }
-
-    const { data } = await response.json()
-
-    this.setState({ jobs: data })
+    this.props.getJobSearch(this.state.query)
   }
 
   render() {
@@ -49,7 +46,7 @@ class MainSearch extends Component {
             </Form>
           </Col>
           <Col xs={10} className="mx-auto mb-5">
-            {this.state.jobs.map((jobData) => (
+            {this.props.jobs.map((jobData) => (
               <Job key={jobData._id} data={jobData} />
             ))}
           </Col>
@@ -59,4 +56,4 @@ class MainSearch extends Component {
   }
 }
 
-export default MainSearch
+export default connect(mapStateToProps, mapDispatchToProps)(MainSearch)

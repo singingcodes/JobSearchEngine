@@ -5,7 +5,7 @@ import { connect } from "react-redux"
 import { removeFromFavoritesAction } from "../redux/actions"
 
 const mapStateToProps = (state) => ({
-  favorites: state.favorites.data,
+  favorites: state.favorite.data,
 })
 
 const mapDispatchToProps = (dispatch) => ({

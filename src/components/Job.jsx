@@ -6,7 +6,7 @@ import { addToFavoritesAction } from "../redux/actions"
 import { AiFillStar } from "react-icons/ai"
 
 const mapStateToProps = (state) => ({
-  favorite: state.favorites.data,
+  favorite: state.favorite.data,
 })
 
 const mapDispatchToProps = (dispatch) => ({

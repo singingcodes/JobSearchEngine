@@ -3,7 +3,7 @@ import { connect } from "react-redux"
 import { Button, Container, Row, Col } from "react-bootstrap"
 
 const mapStateToProps = (state) => ({
-  favoriteLength: state.favorites.data.length,
+  favoriteLength: state.favorite.data.length,
 })
 
 const FavoriteIndicator = ({ favoriteLength }) => {
