@@ -14,11 +14,16 @@ export const removeFromFavoritesAction = (jobToRemove) => ({
   payload: jobToRemove,
 })
 
-export const getJobsAction = (props) => {
+export const getJobsAction = (companyName) => {
   return async (dispatch, getState) => {
+    if (!getState().job.isLoading) {
+      dispatch({
+        type: GET_JOBS_LOADING,
+      })
+    }
     try {
       let response = await fetch(
-        "https://strive-jobs-api.herokuapp.com/jobs?company=" + props
+        "https://strive-jobs-api.herokuapp.com/jobs?company=" + companyName
       )
       if (response.ok) {
         let data = await response.json()
@@ -50,6 +55,12 @@ export const getJobsAction = (props) => {
 
 export const getJobSearchAction = (query) => {
   return async (dispatch, getState) => {
+    if (!getState().job.isLoading) {
+      dispatch({
+        type: GET_JOBS_LOADING,
+      })
+    }
+
     try {
       let response = await fetch(
         "https://strive-jobs-api.herokuapp.com/jobs?search=" +

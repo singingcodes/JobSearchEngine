@@ -1,19 +1,21 @@
 import React from "react"
 import { Row, Col, Button } from "react-bootstrap"
 import { Link } from "react-router-dom"
-import { connect } from "react-redux"
+import { useDispatch } from "react-redux"
 import { addToFavoritesAction } from "../redux/actions"
 import { AiFillStar } from "react-icons/ai"
 
-const mapStateToProps = (state) => ({
-  favorite: state.favorite.data,
-})
+// const mapStateToProps = (state) => ({
+//   favorite: state.favorite.data,
+// })
 
-const mapDispatchToProps = (dispatch) => ({
-  addToFavorites: (job) => dispatch(addToFavoritesAction(job)),
-})
+// const mapDispatchToProps = (dispatch) => ({
+//   addToFavorites: (job) => dispatch(addToFavoritesAction(job)),
+// })
 
 const Job = (props) => {
+  const dispatch = useDispatch()
+  // const favorite = useSelector((state) => state.favorite.data)
   return (
     <Row
       className="mx-0 mt-3 p-3"
@@ -33,7 +35,7 @@ const Job = (props) => {
         <Button
           color="primary"
           onClick={() => {
-            props.addToFavorites(props.data)
+            dispatch(addToFavoritesAction(props.data))
           }}
         >
           <AiFillStar />
@@ -44,4 +46,4 @@ const Job = (props) => {
   )
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Job)
+export default Job

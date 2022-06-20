@@ -1,19 +1,22 @@
 import Button from "react-bootstrap/Button"
 import { FaTrash } from "react-icons/fa"
 import { Container, Col, Row } from "react-bootstrap"
-import { connect } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import { removeFromFavoritesAction } from "../redux/actions"
 
-const mapStateToProps = (state) => ({
-  favorites: state.favorite.data,
-})
+// const mapStateToProps = (state) => ({
+//   favorites: state.favorite.data,
+// })
 
-const mapDispatchToProps = (dispatch) => ({
-  removeFavorite: (idToRemove) =>
-    dispatch(removeFromFavoritesAction(idToRemove)),
-})
+// const mapDispatchToProps = (dispatch) => ({
+//   removeFavorite: (idToRemove) =>
+//     dispatch(removeFromFavoritesAction(idToRemove)),
+// })
 
-const Favorites = ({ favorites, removeFavorite }) => {
+const Favorites = () => {
+  const favorites = useSelector((state) => state.favorite.data)
+  const dispatch = useDispatch()
+
   return (
     <Container>
       <Row className="justify-content-center">
@@ -24,7 +27,7 @@ const Favorites = ({ favorites, removeFavorite }) => {
               <li className="list-group-item" key={i}>
                 <Button
                   variant="danger"
-                  onClick={() => removeFavorite(i)}
+                  onClick={() => dispatch(removeFromFavoritesAction(i))}
                   className="mx-2"
                 >
                   <FaTrash />
@@ -44,4 +47,4 @@ const Favorites = ({ favorites, removeFavorite }) => {
   )
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Favorites)
+export default Favorites

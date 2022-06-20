@@ -1,13 +1,14 @@
 import { useNavigate } from "react-router-dom"
-import { connect } from "react-redux"
+import { useSelector } from "react-redux"
 import { Button, Container, Row, Col } from "react-bootstrap"
 
-const mapStateToProps = (state) => ({
-  favoriteLength: state.favorite.data.length,
-})
+// const mapStateToProps = (state) => ({
+//   favoriteLength: state.favorite.data.length,
+// })
 
-const FavoriteIndicator = ({ favoriteLength }) => {
+const FavoriteIndicator = () => {
   const navigate = useNavigate()
+  const favoriteLength = useSelector((state) => state.favorite.data.length)
   return (
     <Container>
       <Row className="float-right my-3">
@@ -25,4 +26,4 @@ const FavoriteIndicator = ({ favoriteLength }) => {
     </Container>
   )
 }
-export default connect(mapStateToProps)(FavoriteIndicator)
+export default FavoriteIndicator
